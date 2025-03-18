@@ -1,0 +1,30 @@
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  position: absolute;
+  width: 100%;
+}
+
+.image1 {
+  top: -400%;
+}
+
+.image2 {
+  top: 464px;
+}
+
+.image3 {
+  top: 673px;
+}
+
+.image4 {
+  top: 0px;
+}
+
+.image5 {
+  /* top: 900px; */
+}
