@@ -1,7 +1,8 @@
 import { Layout, Menu, ConfigProvider } from 'antd';
 import { Link, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage/HomePage';
+import HomePage from './pages/Home/HomePage';
 import '../index.css'; // Подключаем стили
+import { Avatar } from "antd";
 
 const { Header, Content, Footer } = Layout;
 
@@ -23,22 +24,37 @@ export const LayoutComponent = () => {
     >
       <Layout style={{ minHeight: '200vh' }}>
         <Layout style={{ background: '#0B1D26' }}>
-          <Header
-            style={{
-              background: '#0B1D26',
-            }}
-          >
-            <Menu
-              theme="dark"
-              mode="horizontal"
-              items={items}
+            <Header
               style={{
                 background: '#0B1D26',
-                fontSize: '22px',
-                display: 'flex', // включаем flexbox
-                justifyContent: 'center', // выравнивание элементов по центру
               }}
-            />
+            >          
+            <div className="header-container">
+              <div className="logo">
+                <Link to="/">
+                  <img src="../public/Logo.svg" alt="Logo" />
+                </Link>
+              </div>
+              
+              <Menu
+                theme="dark"
+                mode="horizontal"
+                items={items}
+                style={{
+                  background: '#0B1D26',
+                  fontSize: '22px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  width: '100%',
+                }}
+              />
+
+              <div className="profile-icon">
+                <Link to="/profile">
+                  <img src="../public/Account.svg" alt="Account" />
+                </Link>
+              </div>
+            </div>
           </Header>
 
           <Content style={{ margin: '16px', background: '#0B1D26' , margin: 0}}>

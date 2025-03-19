@@ -2,4 +2,19 @@ body {
     font-family: 'Delicious Handrawn', sans-serif;
     margin: 0;
 }
-  
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logo {
+    height: 50px; 
+}
+
+.profile-icon {
+    height: 50px; 
+    width: 267px;
+}
