@@ -1,0 +1,22 @@
+import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import MntBar from "../components/MntBar";
+
+const Home = () => {
+  return (
+    <Container>
+      <Row className="mt-2">
+        <Col md={3}>
+          <MntBar />
+        </Col>
+        <Col md={9}>
+          {/* <BrandBar />
+          <DeviceList />
+          <Pages /> */}
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
+export default Home;
