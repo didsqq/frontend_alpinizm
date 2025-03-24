@@ -5,6 +5,7 @@ export default class ClimbsStore {
     this._climbs = [
       {
         id: 1, // ID_mountain_climbs
+        title: "Восхождение на гору эверест",
         groupId: 1, // ID_groups
         mountainId: 2, // ID_mountain (Эверест)
         categoryId: 3, // ID_category (Hard)
@@ -14,6 +15,7 @@ export default class ClimbsStore {
       },
       {
         id: 2,
+        title: "Восхождение на гору килиманджаро",
         groupId: 2,
         mountainId: 1, // Килиманджаро
         categoryId: 1, // Easy

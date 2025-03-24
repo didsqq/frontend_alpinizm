@@ -1,7 +1,8 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import MntBar from "../components/MntBar";
-
+import CatBar from "../components/CatBar";
+import ClimbList from "../components/ClimbList";
 const Home = () => {
   return (
     <Container>
@@ -10,9 +11,8 @@ const Home = () => {
           <MntBar />
         </Col>
         <Col md={9}>
-          {/* <BrandBar />
-          <DeviceList />
-          <Pages /> */}
+            <CatBar/>
+            <ClimbList/>
         </Col>
       </Row>
     </Container>
