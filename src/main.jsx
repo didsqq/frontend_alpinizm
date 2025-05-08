@@ -4,10 +4,9 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/approuter/AppRouter";
 import NavBar from "./components/NavBar";
-import MainStore from "./store/MainStore";
 import UserStore from "./store/UserStore";
 export const Context = createContext(null);
-
+import MainStore from "./store/MainStore";
 createRoot(document.getElementById("root")).render(
   <Context.Provider
     value={{
@@ -21,3 +20,4 @@ createRoot(document.getElementById("root")).render(
     </BrowserRouter>
   </Context.Provider>
 );
+

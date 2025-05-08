@@ -3,10 +3,11 @@ import { makeAutoObservable } from "mobx";
 export default class CategoryStore {
   constructor() {
     this._categories = [
-      { id: 1, title: "Eazy" },
-      { id: 2, title: "Medium" },
-      { id: 3, title: "Hard" },
+      { ID: 1, title: "Easy" },
+      { ID: 2, title: "Medium" },
+      { ID: 3, title: "Hard" },
     ];
+    this._selectedCategory = null;
     makeAutoObservable(this);
   }
 
@@ -16,5 +17,14 @@ export default class CategoryStore {
 
   get categories() {
     return this._categories;
+  }
+
+  setSelectedCategory(category) {
+    this._selectedCategory = category;
+    console.log("selected category", this._selectedCategory)
+  }
+
+  get selectedCategory() {
+    return this._selectedCategory;
   }
 }

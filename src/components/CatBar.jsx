@@ -7,19 +7,19 @@ const CatBar = observer(() => {
     const {store} = useContext(Context)
 
     return (
-        <Row className="d-flex">
+        <Row className="d-flex flex-row flex-wrap gap-2">
             {store.categoryStore.categories.map(category =>
                 <Card
-                    style={{cursor:'pointer'}}
-                    key={category.id}
+                    style={{ cursor: 'pointer', width: '150px', textAlign: 'center' }}
+                    key={category.ID}
                     className="p-3"
-                    // onClick={() => device.setSelectedBrand(brand)}
-                    // border={brand.id === device.selectedBrand.id ? 'danger' : 'light'}
+                    onClick={() => store.categoryStore.setSelectedCategory(category)}
+                    border={store.categoryStore.selectedCategory?.ID === category.ID ? 'danger' : 'light'}
                 >
                     {category.title}
                 </Card>
             )}
-        </Row>
+        </Row> 
     );
 });
 

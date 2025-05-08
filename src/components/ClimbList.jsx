@@ -10,7 +10,7 @@ const ClimbList = observer(() => {
     return (
         <Row className="d-flex">
             {store.climbsStore.climbs.map(climb =>
-                <ClimbItem key={climb.id} climb={climb}/>
+                <ClimbItem key={climb.ID} climb={climb}/>
             )}
         </Row>
     );

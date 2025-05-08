@@ -7,15 +7,21 @@ import { useNavigate } from "react-router-dom";
 const ClimbItem = ({climb}) => {
     const navigate = useNavigate();
     return (
-        <Col md={3} className={"mt-3"} onClick={() => navigate(CLIMB_ROUTE + '/' + climb.id)}>
+        <Col md={3} className={"mt-3"} onClick={() => navigate(CLIMB_ROUTE + '/' + climb.ID)}>
             <Card style={{width: 150, cursor: 'pointer'}} border={"light"}>
-                <Image width={150} height={150} /*src={process.env.REACT_APP_API_URL + climb.img}*//>
+                <Image 
+                    width={200} 
+                    height={200} 
+                    src={climb.PhotoUrl || 'https://via.placeholder.com/150'} 
+                    alt={climb.Title}
+                    style={{objectFit: 'cover'}}
+                />
                 <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
                     <div className="d-flex align-items-center">
-                        {/* <div>{climb.rating}</div> */}
+                        <div>{climb.Title}</div>
                     </div>
                 </div>
-                <div>{climb.title}</div>
+                <div>Дата начала восхождения: {new Date(climb.StartDate).toLocaleDateString()}</div>
             </Card>
         </Col>
     );
