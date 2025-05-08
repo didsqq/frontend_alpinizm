@@ -1,12 +1,14 @@
 import React, {useContext, useEffect} from 'react';
 import { Col, Container, Row } from "react-bootstrap";
-import MntBar from "../components/MntBar";
 import CatBar from "../components/CatBar";
+import MntBar from "../components/MntBar";
 import ClimbList from "../components/ClimbList";
 import { observer } from "mobx-react-lite";
-import {Context} from "../main";
+import {Context} from "../context";
 import { fetchMountains, fetchClimbs } from '../http/climbsAPI';
-import FluidArtExperience from "../components/halftone-waves"
+import FluidArtExperience from "../components/background/fluid-art-experience"
+import AbstractPainting from "../components/background/halftone-waves"
+import ParticlesBackground from "../components/background/particles-background"
 
 const Home = observer(() => {
   const {store} = useContext(Context)
@@ -25,22 +27,25 @@ const Home = observer(() => {
   }, [store.mountainStore.selectedMountain, store.categoryStore.selectedCategory])
 
   return (
-    <div className="position-relative min-vh-100">
-      <div className="position-fixed top-0 start-0 w-100 h-100" style={{ zIndex: -1 }}>
-        <FluidArtExperience />
+<div className="relative min-h-screen">
+      <div className="fixed top-0 left-0 w-full h-full -z-10">
+        {/* <FluidArtExperience /> */}
+        {/* <AbstractPainting /> */}
+        <ParticlesBackground />
       </div>
-      <Container>
-        <Row className="mt-2">
-          <Col md={3}>
-            <MntBar />
-          </Col>
-          <Col md={9}>
-            <CatBar/>
-            <ClimbList/>
-          </Col>
-        </Row>
-      </Container>
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row mt-2 gap-4">
+          <div className="w-full md:w-1/4">
+            <MntBar/>
+          </div>
+          <div className="w-full md:w-3/4">
+            <CatBar />
+            <ClimbList />
+          </div>
+        </div>
+      </div>
     </div>
+
   );
 });
 

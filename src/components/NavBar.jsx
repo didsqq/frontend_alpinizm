@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Context } from "../main";
+import { Context } from "../context";
 import { ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from "../utils/consts";
 
 const NavBar = observer(() => {
@@ -28,13 +28,14 @@ const NavBar = observer(() => {
             <Button
               variant={"outline-light"}
               onClick={() => navigate(ADMIN_ROUTE)}
+              className="border-none focus:outline-none"
             >
               Админ панель
             </Button>
             <Button
               variant={"outline-light"}
               onClick={() => logOut()}
-              className="ml-2"
+              className="ml-2 border-none focus:outline-none"
             >
               Выйти
             </Button>
@@ -44,6 +45,7 @@ const NavBar = observer(() => {
             <Button
               variant={"outline-light"}
               onClick={() => navigate(LOGIN_ROUTE)}
+              className="border-none focus:outline-none"
             >
               Авторизация
             </Button>

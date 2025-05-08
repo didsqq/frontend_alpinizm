@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
 export default class MountainStore {
+
   constructor() {
-    
     this._mountains = [];
     this._selectedMountain = null;
     this._page = 1;

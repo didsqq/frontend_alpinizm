@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { Context } from "../main";
+import { Context } from "../context";
 import { HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
 import {login, registration} from "../http/userAPI";
 
