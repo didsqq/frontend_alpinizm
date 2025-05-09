@@ -58,7 +58,7 @@ const ClimbList = observer(() => {
                 <div className="flex items-center">
                     <span className="text-sm text-gray-600 mr-2">Сортировать по:</span>
                     <button
-                        className={`border-none flex items-center px-3 py-1 rounded-md text-sm mr-2 ${
+                        className={`border-none flex items-center px-3 py-1 rounded-md text-sm mr-2 bg-[#778DA9] hover:bg-[#778DA9]/90 ${
                             sortBy === "rating" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"
                         }`}
                         onClick={() => setSortBy("rating")}

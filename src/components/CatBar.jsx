@@ -38,7 +38,7 @@ const CatBar = observer(() => {
         <h2 className="text-lg font-semibold">Filters</h2>
         <button
           onClick={clearFilters}
-          className="border-none ml-auto inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow-sm hover:shadow-md"
+          className="border-none ml-auto inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium text-white bg-[#778DA9] hover:bg-[#778DA9]/90 transition-colors shadow-sm hover:shadow-md"
         >
           Clear Filters
         </button>
