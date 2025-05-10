@@ -24,12 +24,7 @@ const MntBar = observer(() => {
       <Mountain className="mr-2 h-5 w-5text-[#000000]" />
       Горные вершины
     </h2>
-    <button
-      onClick={() => setIsExpanded(!isExpanded)}
-      className="bg-white focus:outline-none border-none"
-    >
-      {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-    </button>
+
   </div>
 
   {isExpanded && (
@@ -50,7 +45,7 @@ const MntBar = observer(() => {
             {filteredMountains.map((mountain) => (
               <li key={mountain.ID}>
               <button
-                className={`w-full text-left p-2 rounded-md transition-colors bg-white hover:bg-gray-100 focus:outline-none border-none ${
+                className={`w-full text-left p-2 rounded-md transition-colors bg-white hover:bg-[#E0E1DD]/90 focus:outline-none border-none ${
                   selectedMountain?.ID === mountain.ID
                     ? "bg-blue-100 text-blue-700"
                     : ""

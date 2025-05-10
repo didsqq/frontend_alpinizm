@@ -55,25 +55,6 @@ const ClimbList = observer(() => {
         <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4">
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold">Маршруты восхождений</h2>
-                <div className="flex items-center">
-                    <span className="text-sm text-gray-600 mr-2">Сортировать по:</span>
-                    <button
-                        className={`border-none flex items-center px-3 py-1 rounded-md text-sm mr-2 bg-[#778DA9] hover:bg-[#778DA9]/90 ${
-                            sortBy === "rating" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"
-                        }`}
-                        onClick={() => setSortBy("rating")}
-                    >
-                        <Star className="h-4 w-4 mr-1" /> Рейтинг
-                    </button>
-                    <button
-                        className={`border-none flex items-center px-3 py-1 rounded-md text-sm ${
-                            sortBy === "popularity" ? "bg-blue-500 text-white" : "bg-gray-200 hover:bg-gray-300"
-                        }`}
-                        onClick={() => setSortBy("popularity")}
-                    >
-                        <Users className="h-4 w-4 mr-1" /> Популярность
-                    </button>
-                </div>
             </div>
 
             {sortedClimbs.length > 0 ? (

@@ -8,7 +8,7 @@ import NavBar from "./components/NavBar";
 import UserStore from "./store/UserStore";
 import MainStore from "./store/MainStore";
 import { Context } from "./context";
-
+import Footer from "./components/Footer";
 const user = new UserStore();
 const store = new MainStore();
 
@@ -18,6 +18,7 @@ root.render(
     <BrowserRouter>
       <NavBar />
       <AppRouter />
+      <Footer />
     </BrowserRouter>
   </Context.Provider>
 );

@@ -23,7 +23,16 @@ export default class CategoryStore {
 
   setSelectedCategory(category) {
     this._selectedCategory = category;
-    console.log("selected category", this._selectedCategory)
+    if (category) {
+      if (this._selectedCategories.includes(category.ID)) {
+        this._selectedCategories = [];
+      } else {
+        this._selectedCategories = [category.ID];
+      }
+    } else {
+      this._selectedCategories = [];
+    }
+    console.log("selected categories", this._selectedCategories);
   }
 
   get selectedCategory() {

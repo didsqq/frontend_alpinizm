@@ -14,19 +14,6 @@ const difficulties = [
 const CatBar = observer(() => {
   const { store } = useContext(Context);
 
-  const toggleDifficulty = (difficultyId) => {
-    if (store.categoryStore.selectedCategories.includes(difficultyId)) {
-      store.categoryStore.setSelectedCategories(
-        store.categoryStore.selectedCategories.filter((id) => id !== difficultyId)
-      );
-    } else {
-      store.categoryStore.setSelectedCategories([
-        ...store.categoryStore.selectedCategories,
-        difficultyId,
-      ]);
-    }
-  };
-
   const clearFilters = () => {
     store.categoryStore.setSelectedCategory(null);
     store.mountainStore.setSelectedMountain(null);
@@ -45,17 +32,21 @@ const CatBar = observer(() => {
       </div>
 
       <Row className="d-flex flex-row flex-wrap gap-2 mt-4">
+      <div className="flex flex-wrap gap-2">
         {store.categoryStore.categories.map((category) => (
-          <Card
-            key={category.ID}
-            className="p-3"
-            style={{ cursor: 'pointer', width: '150px', textAlign: 'center' }}
-            onClick={() => store.categoryStore.setSelectedCategory(category)}
-            border={store.categoryStore.selectedCategory?.ID === category.ID ? 'danger' : 'light'}
-          >
-            <span className="text-gray-800">{category.name}</span>
-          </Card>
+          <button
+          key={category.ID}
+          className={`text-[#0D1B2A] border-none  px-3 py-1 rounded-full text-sm transition-colors ${
+            store.categoryStore.selectedCategories.includes(category.ID)
+              ? "bg-[#778DA9] text-white"
+              : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+          }`}
+          onClick={() => store.categoryStore.setSelectedCategory(category)}
+        >
+          {category.name}
+        </button>
         ))}
+        </div>
       </Row>
     </div>
   );

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Container, Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Context } from "../context";
 import { HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
-import {login, registration} from "../http/userAPI";
+import {login, registration, fetchCategories} from "../http/userAPI";
 
 const Auth = observer(() => {
   const { user } = useContext(Context);
@@ -19,9 +19,13 @@ const Auth = observer(() => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [sex, setSex] = useState("");
-  const [i_sport_category, setISportCategory] = useState("");
+  const [i_sport_category, setISportCategory] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    fetchCategories().then(data => user.setCategories(data))
+  }, [])
 
   const click = async () => {
     try {
@@ -50,9 +54,12 @@ const Auth = observer(() => {
       className="d-flex justify-content-center align-items-center"
       style={{ height: window.innerHeight - 54 }}
     >
-      <Card style={{ width: 600 }} className="p-5">
+      <Card style={{ width: 600 }} className="shadow-lg p-5">
         <h2 className="m-auto">{isLogin ? "Авторизация" : "Регистрация"}</h2>
-        <Form className="d-flex flex-column">
+        <Form className="d-flex flex-column" onSubmit={(e) => {
+          e.preventDefault();
+          click();
+        }}>
           {!isLogin && (
             <>
               <Form.Control
@@ -79,18 +86,27 @@ const Auth = observer(() => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
-              <Form.Control
+              <Form.Select
                 className="mt-3"
-                placeholder="Введите ваш пол..."
                 value={sex}
                 onChange={(e) => setSex(e.target.value)}
-              />
-              <Form.Control
+              >
+                <option value="">Выберите пол...</option>
+                <option value="Мужской">Мужской</option>
+                <option value="Женский">Женский</option>
+              </Form.Select>
+              <Form.Select
                 className="mt-3"
-                placeholder="Введите вашу спортивную категорию..."
-                value={i_sport_category}
-                onChange={(e) => setISportCategory(e.target.value)}
-              />
+                value={i_sport_category || ""}
+                onChange={(e) => setISportCategory(e.target.value ? parseInt(e.target.value) : null)}
+              >
+                <option value="">Выберите спортивную категорию...</option>
+                {user.categories.map(category => (
+                  <option key={category.ID} value={category.ID}>
+                    {category.Title}
+                  </option>
+                ))}
+              </Form.Select>
             </>
           )}
           <Form.Control
@@ -107,19 +123,11 @@ const Auth = observer(() => {
             type="password"
           />
           <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
-            {isLogin ? (
-              <div>
-                Нет аккаунта?{" "}
-                <NavLink to={REGISTRATION_ROUTE}>Зарегистрируйся!</NavLink>
-              </div>
-            ) : (
-              <div>
-                Есть аккаунт? <NavLink to={LOGIN_ROUTE}>Войдите!</NavLink>
-              </div>
-            )}
-            <Button variant={"outline-success"} onClick={click}>
+            <button 
+              type="submit"
+              className="text-[#0D1B2A] border border-gray-300 rounded-md font-medium px-4 py-2 h-9 hover:bg-gray-100 flex items-center justify-center">
               {isLogin ? "Войти" : "Регистрация"}
-            </Button>
+            </button>
           </Row>
         </Form>
       </Card>

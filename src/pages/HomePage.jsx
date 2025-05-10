@@ -6,8 +6,6 @@ import ClimbList from "../components/ClimbList";
 import { observer } from "mobx-react-lite";
 import {Context} from "../context";
 import { fetchMountains, fetchClimbs } from '../http/climbsAPI';
-import FluidArtExperience from "../components/background/fluid-art-experience"
-import AbstractPainting from "../components/background/halftone-waves"
 import ParticlesBackground from "../components/background/particles-background"
 
 const Home = observer(() => {
