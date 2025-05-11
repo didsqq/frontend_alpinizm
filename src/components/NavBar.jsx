@@ -42,7 +42,7 @@ const NavBar = observer(() => {
           <>
             <button 
               onClick={() => navigate(LOGIN_ROUTE)}
-              className="text-[#0D1B2A] bg-[#E0E1DD] border rounded-md font-medium px-4 py-2 h-9 hover:bg-[#E0E1DD]/80 flex items-center justify-center">
+              className="border-none text-[#0D1B2A] bg-[#E0E1DD] rounded-md font-medium px-4 py-2 h-9 hover:bg-[#E0E1DD]/80 flex items-center justify-center">
               Sign in
             </button>
             <button 

@@ -38,7 +38,7 @@ const MntBar = observer(() => {
         />
       </div>
 
-      <div className="max-h-[60vh] overflow-y-auto pr-1">
+      <div className="max-h-[60vh] overflow-y-auto pr-1 custom-scrollbar">
         {filteredMountains.length > 0 ? (
           <ul className="space-y-2 pl-0">
             {filteredMountains.map((mountain) => (
@@ -70,6 +70,25 @@ const MntBar = observer(() => {
       </div>
     </>
   )}
+
+  <style jsx>{`
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: rgba(156, 163, 175, 0.5);
+      border-radius: 3px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(156, 163, 175, 0.7);
+    }
+  `}</style>
 </div>
 
 
