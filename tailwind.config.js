@@ -8,7 +8,5 @@ export default {
     extend: {},
   },
   plugins: [],
-  corePlugins: {
-    preflight: false, // Отключаем preflight для избежания конфликтов с Bootstrap
-  },
+
 } 

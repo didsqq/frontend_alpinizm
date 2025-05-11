@@ -1,7 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext, useState } from "react";
 import { Context } from "../context";
-import { ChevronDown, ChevronUp, Mountain } from "lucide-react";
 
 const MntBar = observer(() => {
   const { store } = useContext(Context);
@@ -21,7 +20,7 @@ const MntBar = observer(() => {
 <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4 mb-4">
   <div className="flex items-center justify-between mb-4">
     <h2 className="text-xl font-bold flex items-center">
-      <Mountain className="mr-2 h-5 w-5text-[#000000]" />
+      
       Горные вершины
     </h2>
 

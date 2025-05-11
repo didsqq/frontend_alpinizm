@@ -7,7 +7,13 @@ export const fetchMountains = async () => {
 }
 
 export const fetchClimbs = async (mountainId, categoryId) => {
-    const {data} = await $host.get('api/climbs',{params: {mountainId , categoryId }})
+    const {data} = await $host.get('api/climb',{params: {mountainId , categoryId }})
     console.log('Climbs data from server:', data)
+    return data
+}
+
+export const fetchClimb = async (id) => {
+    const {data} = await $host.get(`api/climb/${id}`)
+    console.log('Climb data from server:', data)
     return data
 }

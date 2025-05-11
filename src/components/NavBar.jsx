@@ -15,7 +15,7 @@ const NavBar = observer(() => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-[#E0E1DD] backdrop-blur supports-[backdrop-filter]:bg-[#0D1B2A]/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 backdrop-blur bg-[#0D1B2A]/70">
       <div className="container flex h-14 max-w-screen-2xl items-center">
         <NavLink to={HOME_ROUTE} className="mr-6 flex items-center space-x-2 no-underline">
           <span className="font-bold text-[#E0E1DD]">Alter Ego</span>
@@ -42,12 +42,12 @@ const NavBar = observer(() => {
           <>
             <button 
               onClick={() => navigate(LOGIN_ROUTE)}
-              className="text-[#0D1B2A] bg-[#E0E1DD] border rounded-md font-medium px-4 py-2 h-9 hover:bg-[#E0E1DD]/90 flex items-center justify-center">
+              className="text-[#0D1B2A] bg-[#E0E1DD] border rounded-md font-medium px-4 py-2 h-9 hover:bg-[#E0E1DD]/80 flex items-center justify-center">
               Sign in
             </button>
             <button 
               onClick={() => navigate(REGISTRATION_ROUTE)}
-              className="border-none text-white bg-[#778DA9] rounded-md font-medium px-4 py-2 h-9 hover:bg-[#778DA9]/90 flex items-center justify-center">
+              className="border-none text-white bg-[#778DA9] rounded-md font-medium px-4 py-2 h-9 hover:bg-[#778DA9]/80 flex items-center justify-center">
               Sign up
             </button>
           </>

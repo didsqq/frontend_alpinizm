@@ -1,10 +1,9 @@
 import { observer } from "mobx-react-lite";
 import React, { useContext, useState, useEffect } from "react";
 import { Container, Form } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Context } from "../context";
 import { HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
 import {login, registration, fetchCategories} from "../http/userAPI";

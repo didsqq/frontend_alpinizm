@@ -29,4 +29,8 @@ export default class MountainStore {
   get selectedMountain() {
     return this._selectedMountain;
   }
+
+  getMountainById(id) {
+    return this._mountains.find(mountain => mountain.Id === id);
+  }
 }

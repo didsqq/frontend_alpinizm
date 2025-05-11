@@ -3,6 +3,7 @@ import Auth from "./pages/Auth";
 import Equipment from "./pages/Equipment/Equipment";
 import Home from "./pages/HomePage";
 import Profile from "./pages/Profile";
+import Climb from "./pages/Climb";
 
 import {
   ADMIN_ROUTE,
@@ -11,6 +12,7 @@ import {
   LOGIN_ROUTE,
   PROFILE_ROUTE,
   REGISTRATION_ROUTE,
+  CLIMB_ROUTE,
 } from "./utils/consts";
 
 export const authRoutes = [
@@ -40,5 +42,9 @@ export const publicRoutes = [
   {
     path: HOME_ROUTE,
     Component: Home,
+  },
+  {
+    path: CLIMB_ROUTE + "/:id",
+    Component: Climb,
   },
 ];

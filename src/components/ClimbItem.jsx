@@ -31,14 +31,12 @@ const ClimbItem = ({ climb }) => {
             <span className="text-sm font-medium">{climb.Rating || "Нет оценки"}</span>
             <span className="mx-2 text-gray-300">|</span>
             <Clock className="h-4 w-4 text-gray-500 mr-1" />
-            <span className="text-sm text-gray-600">{climb.TimeEstimate || "Не указано"}</span>
+            <span className="text-sm text-gray-600">{climb.Duration || "Не указано"}</span>
           </div>
 
           <div className="flex items-center mb-2">
             <ArrowUpDown className="h-4 w-4 text-gray-500 mr-1" />
-            <span className="text-sm text-gray-600 mr-3">{climb.Length || "Неизвестно"}</span>
-            <Thermometer className="h-4 w-4 text-gray-500 mr-1" />
-            <span className="text-sm text-gray-600">{climb.Weather || "Не указано"}</span>
+            <span className="text-sm text-gray-600 mr-3">{climb.Distance || "Неизвестно"}</span>
           </div>
 
           <div className="flex flex-wrap gap-1">

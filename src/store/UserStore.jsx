@@ -3,7 +3,7 @@ import { check } from "../http/userAPI";
 
 export default class UserStore {
     constructor() {
-        this._isAuth = false
+        this._isAuth = !!localStorage.getItem('token')
         this._user = {}
         this._categories = []
         this._selectedCategory = null
@@ -17,9 +17,7 @@ export default class UserStore {
             if (token) {
                 const response = await check()
                 console.log(response)
-                if (response.valid) {
-                    this.setIsAuth(true)
-                } else {
+                if (!response.valid) {
                     this.setUser({})
                     this.setIsAuth(false)
                     localStorage.removeItem('token')
