@@ -17,3 +17,14 @@ export const fetchClimb = async (id) => {
     console.log('Climb data from server:', data)
     return data
 }
+
+export const recordAlpinistClimb = async (id) => {
+    const {data} = await $authHost.post(`api/climb/${id}/record`)
+    return data
+}
+
+export const fetchAlpinistClimb = async (id) => {
+    const {data} = await $authHost.get(`api/climb/reservation`)
+    console.log('Alpinist climb data from server:', data)
+    return data
+}

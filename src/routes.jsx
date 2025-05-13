@@ -4,7 +4,8 @@ import Equipment from "./pages/Equipment/Equipment";
 import Home from "./pages/HomePage";
 import Profile from "./pages/Profile";
 import Climb from "./pages/Climb";
-
+import About from "./pages/About";
+import Reservation from "./pages/Reservation";
 import {
   ADMIN_ROUTE,
   EQUIPMENT_ROUTE,
@@ -13,6 +14,8 @@ import {
   PROFILE_ROUTE,
   REGISTRATION_ROUTE,
   CLIMB_ROUTE,
+  ABOUT_ROUTE,
+  RESERVATION_ROUTE,
 } from "./utils/consts";
 
 export const authRoutes = [
@@ -46,5 +49,13 @@ export const publicRoutes = [
   {
     path: CLIMB_ROUTE + "/:id",
     Component: Climb,
+  },
+  {
+    path: ABOUT_ROUTE,
+    Component: About,
+  },
+  {
+    path: RESERVATION_ROUTE,
+    Component: Reservation,
   },
 ];

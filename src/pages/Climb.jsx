@@ -3,20 +3,26 @@
 import { useState, useEffect, useContext } from "react"
 import { useParams, Link } from "react-router-dom"
 import { ArrowLeft, Calendar, Clock, Compass, Mountain, Star, ThermometerSnowflake, Users, Wind, ChevronLeft, ChevronRight } from "lucide-react"
-import { fetchClimb } from "../http/climbsAPI"
+import { fetchClimb, recordAlpinistClimb } from "../http/climbsAPI"
+
 import { Context } from "../context"
 
 export default function RoutePage() {
   const params = useParams()
   const [activeTab, setActiveTab] = useState("overview")
   const [selectedImage, setSelectedImage] = useState(0)
-  const { store } = useContext(Context)
+  const { store, user } = useContext(Context)
   const routeId = params.id
   const [climb, setClimb] = useState(null)
+  const [registrationStatus, setRegistrationStatus] = useState({ message: '', type: '' })
 
   useEffect(() => {
     fetchClimb(routeId).then(setClimb)
   }, [routeId])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   const nextImage = () => {
     if (climb?.Images) {
@@ -27,6 +33,21 @@ export default function RoutePage() {
   const prevImage = () => {
     if (climb?.Images) {
       setSelectedImage((prev) => (prev - 1 + climb.Images.length) % climb.Images.length)
+    }
+  }
+
+  const handleRegistration = async () => {
+    try {
+      const response = await recordAlpinistClimb(routeId)
+      setRegistrationStatus({
+        message: 'Вы успешно зарегистрировались на восхождение! Дополнительная информация будет отправлена на ваш email',
+        type: 'success'
+      })
+    } catch (error) {
+      setRegistrationStatus({
+        message: error.response?.data?.message || 'Произошла ошибка при регистрации',
+        type: 'error'
+      })
     }
   }
 
@@ -173,9 +194,30 @@ export default function RoutePage() {
                   </div>
 
                   <div className="mt-8">
-                    <button className="border-none bg-[#778DA9] text-white hover:bg-[#778DA9]/80 font-medium py-2 px-6 rounded-lg transition-colors">
-                      Забронировать восхождение
-                    </button>
+                    {registrationStatus.message && (
+                      <div className={`mb-4 p-4 rounded-lg ${
+                        registrationStatus.type === 'success' 
+                          ? 'bg-green-100 text-green-700' 
+                          : 'bg-red-100 text-red-700'
+                      }`}>
+                        {registrationStatus.message}
+                      </div>
+                    )}
+                    {user.isAuth ? (
+                      <button 
+                        onClick={handleRegistration}
+                        className="border-none bg-[#778DA9] text-white hover:bg-[#778DA9]/80 font-medium py-2 px-6 rounded-lg transition-colors"
+                      >
+                        Забронировать восхождение
+                      </button>
+                    ) : (
+                      <div className="text-gray-600">
+                        Для регистрации на восхождение необходимо 
+                        <Link to="/login" className="text-blue-600 hover:text-blue-800 ml-1">
+                          войти в систему
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

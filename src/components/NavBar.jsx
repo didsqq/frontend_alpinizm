@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Context } from "../context";
-import { ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
+import { ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, RESERVATION_ROUTE, ABOUT_ROUTE } from "../utils/consts";
 
 const NavBar = observer(() => {
   const { user } = useContext(Context);
@@ -21,21 +21,28 @@ const NavBar = observer(() => {
           <span className="font-bold text-[#E0E1DD]">Alter Ego</span>
         </NavLink>
         <nav className="flex flex-1 items-center space-x-6 text-sm font-medium">
-          <NavLink to="/solutions" className={({isActive}) => 
+        {user.isAuth ? (
+          <>
+          <NavLink to={RESERVATION_ROUTE} className={({isActive}) => 
             `transition-colors hover:text-primary no-underline text-[#E0E1DD] ${isActive ? 'text-white' : ''}`
           }>
-            Solutions
+            Reservation
           </NavLink>
-          <NavLink to="/industries" className={({isActive}) => 
+          <NavLink to={ABOUT_ROUTE} className={({isActive}) => 
             `transition-colors hover:text-primary no-underline text-[#E0E1DD] ${isActive ? 'text-white' : ''}`
           }>
-            Industries
+            About Us
           </NavLink>
+          </>
+        ) : (
+          <>
           <NavLink to="/about" className={({isActive}) => 
             `transition-colors hover:text-primary no-underline text-[#E0E1DD] ${isActive ? 'text-white' : ''}`
           }>
             About Us
           </NavLink>
+          </>
+        )}
         </nav>
         <div className="flex items-center space-x-4">
         {!user.isAuth ? (
@@ -61,41 +68,6 @@ const NavBar = observer(() => {
         </div>
       </div>
     </header>
-    // <Navbar bg="dark" variant="dark">
-    //   <Container>
-    //     <NavLink style={{ color: "white" }} to={HOME_ROUTE}>
-    //       Alter Ego
-    //     </NavLink>
-    //     {user.isAuth ? (
-    //       <Nav className="ml-auto" style={{ color: "white" }}>
-    //         <Button
-    //           variant={"outline-light"}
-    //           onClick={() => navigate(ADMIN_ROUTE)}
-    //           className="border-none focus:outline-none"
-    //         >
-    //           Админ панель
-    //         </Button>
-    //         <Button
-    //           variant={"outline-light"}
-    //           onClick={() => logOut()}
-    //           className="ml-2 border-none focus-outline-none"
-    //         >
-    //           Выйти
-    //         </Button>
-    //       </Nav>
-    //     ) : (
-    //       <Nav className="ml-auto" style={{ color: "white" }}>
-    //         <Button
-    //           variant={"outline-light"}
-    //           onClick={() => navigate(LOGIN_ROUTE)}
-    //           className="border-none focus:outline-none"
-    //         >
-    //           Авторизация
-    //         </Button>
-    //       </Nav>
-    //     )}
-    //   </Container>
-    // </Navbar>
   );
 });
 

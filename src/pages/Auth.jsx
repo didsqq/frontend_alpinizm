@@ -21,6 +21,7 @@ const Auth = observer(() => {
   const [i_sport_category, setISportCategory] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [registrationStatus, setRegistrationStatus] = useState({ message: '', type: '' })
 
   useEffect(() => {
     fetchCategories().then(data => user.setCategories(data))
@@ -31,20 +32,30 @@ const Auth = observer(() => {
       let data;
       if (isLogin) {
         data = await login(username, password);
+        user.setUser(user);
+        user.setIsAuth(true);
+        navigate(HOME_ROUTE);
       } else {
         data = await registration(username, password, surname, name, address, phone, sex, i_sport_category);
+        navigate(LOGIN_ROUTE);
+        setUsername("");
+        setPassword("");
+        setSurname("");
+        setName("");
+        setAddress("");
+        setPhone("");
+        setSex("");
+        setISportCategory(null);
+        setRegistrationStatus({
+          message: '',
+          type: ''
+        });
       }
-      console.log(data);
-      user.setUser(user);
-      user.setIsAuth(true);
-      navigate(HOME_ROUTE);
     } catch (e) {
-      if (e.response?.data?.message) {
-        alert(e.response.data.message);
-      } else {
-        alert("Произошла ошибка: " + (e.message || "Неизвестная ошибка"));
-        console.error(e);
-      }
+      setRegistrationStatus({
+        message: e.response?.data?.message || 'Произошла ошибка при регистрации',
+        type: 'error'
+      });
     }
   };
 
@@ -121,6 +132,17 @@ const Auth = observer(() => {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
+          <div className="mt-8">
+          {registrationStatus.message && (
+            <div className={`mb-4 p-4 rounded-lg ${
+              registrationStatus.type === 'success' 
+                ? 'bg-green-100 text-green-700' 
+                : 'bg-red-100 text-red-700'
+            }`}>
+              {registrationStatus.message}
+            </div>
+          )}
+          </div>
           <Row className="d-flex justify-content-between mt-3 pl-3 pr-3">
             <button 
               type="submit"
