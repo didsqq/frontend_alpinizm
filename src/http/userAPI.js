@@ -30,3 +30,8 @@ export const fetchCategories = async () => {
     const {data} = await $host.get('/api/user/categories')
     return data;
 }
+
+export const fetchUser = async () => {
+    const {data} = await $authHost.get('/api/user')
+    return data;
+}

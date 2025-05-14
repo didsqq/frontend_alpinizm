@@ -1,8 +1,9 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Context } from "../context";
 import { ADMIN_ROUTE, HOME_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, RESERVATION_ROUTE, ABOUT_ROUTE } from "../utils/consts";
+import { fetchClimbCategories } from "../http/climbsAPI";
 
 const NavBar = observer(() => {
   const { user } = useContext(Context);
@@ -26,12 +27,12 @@ const NavBar = observer(() => {
           <NavLink to={RESERVATION_ROUTE} className={({isActive}) => 
             `transition-colors hover:text-primary no-underline text-[#E0E1DD] ${isActive ? 'text-white' : ''}`
           }>
-            Reservation
+            Мои восхождения
           </NavLink>
           <NavLink to={ABOUT_ROUTE} className={({isActive}) => 
             `transition-colors hover:text-primary no-underline text-[#E0E1DD] ${isActive ? 'text-white' : ''}`
           }>
-            About Us
+            О нас
           </NavLink>
           </>
         ) : (
@@ -39,7 +40,7 @@ const NavBar = observer(() => {
           <NavLink to="/about" className={({isActive}) => 
             `transition-colors hover:text-primary no-underline text-[#E0E1DD] ${isActive ? 'text-white' : ''}`
           }>
-            About Us
+            О нас
           </NavLink>
           </>
         )}
@@ -50,19 +51,19 @@ const NavBar = observer(() => {
             <button 
               onClick={() => navigate(LOGIN_ROUTE)}
               className="border-none text-[#0D1B2A] bg-[#E0E1DD] rounded-md font-medium px-4 py-2 h-9 hover:bg-[#E0E1DD]/80 flex items-center justify-center">
-              Sign in
+              Войти
             </button>
             <button 
               onClick={() => navigate(REGISTRATION_ROUTE)}
               className="border-none text-white bg-[#778DA9] rounded-md font-medium px-4 py-2 h-9 hover:bg-[#778DA9]/80 flex items-center justify-center">
-              Sign up
+              Регистрация
             </button>
           </>
         ) : (
           <button 
             onClick={() => logOut()}
             className="border-none text-white bg-[#778DA9] rounded-md font-medium px-4 py-2 h-9 hover:bg-[#778DA9]/90 flex items-center justify-center">
-            Sign out
+            Выйти
           </button>
         )}
         </div>

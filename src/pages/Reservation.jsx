@@ -1,9 +1,11 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { CLIMB_ROUTE } from "../utils/consts"
 import { fetchAlpinistClimb } from "../http/climbsAPI"
+import { Context } from "../context"
+import { observer } from "mobx-react-lite"
 import {
   ArrowLeft,
   Calendar,
@@ -19,6 +21,7 @@ import {
   X,
   Users,
 } from "lucide-react"
+import { fetchUser } from "../http/userAPI"
 
 // Статистика пользователя
 const userStats = {
@@ -38,6 +41,8 @@ function Reservation() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const navigate = useNavigate()
+  const { user } = useContext(Context);
+  const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
     const loadClimbs = async () => {
@@ -54,6 +59,18 @@ function Reservation() {
     loadClimbs()
   }, [])
 
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const userData = await fetchUser()
+        setCurrentUser(userData)
+      } catch (error) {
+        console.error('Ошибка при загрузке пользователя:', error)
+      }
+    }
+    loadUser()
+  }, [])
+
   // Фильтрация восхождений по статусу (вкладке)
   const filteredClimbs = climbs
     .filter((c) => c.Status === activeTab)
@@ -66,7 +83,7 @@ function Reservation() {
         return "bg-blue-100 text-blue-800"
       case "completed":
         return "bg-green-100 text-green-800"
-      case "cancelled":
+      case "canceled":
         return "bg-red-100 text-red-800"
       default:
         return "bg-gray-100 text-gray-800"
@@ -80,7 +97,7 @@ function Reservation() {
         return "Предстоит"
       case "completed":
         return "Завершено"
-      case "cancelled":
+      case "canceled":
         return "Отменено"
       default:
         return "Неизвестно"
@@ -107,14 +124,14 @@ function Reservation() {
 
             <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-50 rounded-lg p-3 flex items-center">
-                <div className="w-12 h-12 rounded-full bg-[#778DA9] flex items-center justify-center text-white mr-3">
+                <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white mr-3">
                   <User className="h-6 w-6" />
                 </div>
                 <div>
-                  <p className="font-medium">Иван Петров</p>
+                  <p className="font-medium">{currentUser ? `${currentUser.Name} ${currentUser.Surname}` : 'Загрузка...'}</p>
                   <div className="flex items-center text-sm text-gray-500">
                     <Mountain className="h-3 w-3 mr-1" />
-                    <span>{userStats.totalClimbs} восхождений</span>
+                    <span>{climbs.length} восхождений</span>
                   </div>
                 </div>
               </div>
@@ -127,14 +144,14 @@ function Reservation() {
             <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 text-white">
               <p className="text-sm opacity-80 mb-1">Всего восхождений</p>
               <div className="flex items-end justify-between">
-                <p className="text-3xl font-bold">{userStats.totalClimbs}</p>
+                <p className="text-3xl font-bold">{climbs.length}</p>
                 <Mountain className="h-8 w-8 opacity-70" />
               </div>
             </div>
             <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-4 text-white">
               <p className="text-sm opacity-80 mb-1">Предстоит восхождений</p>
               <div className="flex items-end justify-between">
-                <p className="text-3xl font-bold">{userStats.upcomingClimbs}</p>
+                <p className="text-3xl font-bold">{climbs.filter(c => c.Status === "upcoming").length}</p>
                 <Calendar className="h-8 w-8 opacity-70" />
               </div>
             </div>
@@ -181,14 +198,14 @@ function Reservation() {
                 Завершенные ({climbs.filter((c) => c.Status === "completed").length})
               </button>
               <button
-                onClick={() => setActiveTab("cancelled")}
+                onClick={() => setActiveTab("canceled")}
                 className={`flex-1 py-4 px-4 text-center font-medium transition-colors ${
-                  activeTab === "cancelled"
+                  activeTab === "canceled"
                     ? "text-blue-600 border-b-2 border-blue-500"
                     : "text-gray-500 hover:text-gray-700"
                 }`}
               >
-                Отмененные ({climbs.filter((c) => c.Status === "cancelled").length})
+                Отмененные ({climbs.filter((c) => c.Status === "canceled").length})
               </button>
             </div>
           </div>
@@ -303,7 +320,7 @@ function Reservation() {
                   {activeTab === "upcoming" && (
                     <button
                       onClick={() => navigate("/")}
-                      className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                      className="inline-flex items-center px-4 py-2 bg-[#778DA9] text-white rounded-md hover:bg-[#778DA9]/80 transition-colors"
                     >
                       Найти восхождение
                     </button>

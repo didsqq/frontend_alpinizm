@@ -2,12 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 export default class CategoryStore {
   constructor() {
-    this._categories = [
-      { ID: 1, name: "Beginner" },
-      { ID: 2, name: "Intermediate" },
-      { ID: 3, name: "Advanced" },
-      { ID: 4, name: "Expert" },
-    ];
+    this._categories = [];
     this._selectedCategory = null;
     this._selectedCategories = [];
     makeAutoObservable(this);

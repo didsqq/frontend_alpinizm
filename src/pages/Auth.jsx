@@ -27,33 +27,42 @@ const Auth = observer(() => {
     fetchCategories().then(data => user.setCategories(data))
   }, [])
 
+  useEffect(() => {
+    // Сбрасываем сообщение при смене типа формы
+    setRegistrationStatus({ message: '', type: '' });
+  }, [isLogin]);
+
   const click = async () => {
     try {
       let data;
       if (isLogin) {
         data = await login(username, password);
-        user.setUser(user);
+        user.setUser(data);
         user.setIsAuth(true);
         navigate(HOME_ROUTE);
       } else {
         data = await registration(username, password, surname, name, address, phone, sex, i_sport_category);
-        navigate(LOGIN_ROUTE);
-        setUsername("");
-        setPassword("");
-        setSurname("");
-        setName("");
-        setAddress("");
-        setPhone("");
-        setSex("");
-        setISportCategory(null);
         setRegistrationStatus({
-          message: '',
-          type: ''
+          message: 'Регистрация успешна! Теперь вы можете войти в систему.',
+          type: 'success'
         });
+        setTimeout(() => {
+          navigate(LOGIN_ROUTE);
+          setUsername("");
+          setPassword("");
+          setSurname("");
+          setName("");
+          setAddress("");
+          setPhone("");
+          setSex("");
+          setISportCategory(null);
+          setRegistrationStatus({ message: '', type: '' });
+        }, 2000);
       }
     } catch (e) {
+      const errorMessage = e.response?.data?.message || 'Произошла ошибка';
       setRegistrationStatus({
-        message: e.response?.data?.message || 'Произошла ошибка при регистрации',
+        message: isLogin ? `Ошибка входа: ${errorMessage}` : `Ошибка регистрации: ${errorMessage}`,
         type: 'error'
       });
     }

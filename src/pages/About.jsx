@@ -41,25 +41,25 @@ const achievements = [
 // Данные о ценностях
 const values = [
   {
-    icon: <Shield className="h-8 w-8 text-blue-600" />,
+    icon: <Shield className="h-8 w-8 text-[#778DA9]" />,
     title: "Безопасность",
     description:
       "Безопасность всегда на первом месте. Мы используем только проверенное снаряжение, следуем строгим протоколам и постоянно обучаем наших гидов новейшим техникам безопасности.",
   },
   {
-    icon: <Users className="h-8 w-8 text-blue-600" />,
+    icon: <Users className="h-8 w-8 text-[#778DA9]" />,
     title: "Профессионализм",
     description:
       "Наши гиды — сертифицированные профессионалы с многолетним опытом. Они не только обеспечивают безопасность, но и делятся глубокими знаниями о горах, культуре и природе.",
   },
   {
-    icon: <Heart className="h-8 w-8 text-blue-600" />,
+    icon: <Heart className="h-8 w-8 text-[#778DA9]" />,
     title: "Страсть к горам",
     description:
       "Мы искренне любим горы и стремимся передать эту страсть нашим клиентам. Для нас восхождение — это не просто физическое достижение, но и духовный опыт.",
   },
   {
-    icon: <Globe className="h-8 w-8 text-blue-600" />,
+    icon: <Globe className="h-8 w-8 text-[#778DA9]" />,
     title: "Экологичность",
     description:
       "Мы бережно относимся к природе и следуем принципу «не оставлять следов». Наши экспедиции минимизируют воздействие на окружающую среду и поддерживают местные экологические инициативы.",
@@ -72,7 +72,7 @@ export default function About() {
 
       <div className="container mx-auto px-4 py-6">
         {/* Навигация */}
-        <NavLink to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6">
+        <NavLink to="/" className="font-medium inline-flex items-center text-[#778DA9] hover:text-blue-600 no-underline mb-6">
           <ArrowLeft className="h-4 w-4 mr-1" /> На главную
         </NavLink>
 
@@ -89,7 +89,7 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="p-8">
               <h2 className="text-3xl font-bold mb-4 flex items-center">
-                <Mountain className="h-8 w-8 text-blue-600 mr-2" />
+                <Mountain className="h-8 w-8 text-[#778DA9] mr-2" />
                 Наша миссия
               </h2>
               <p className="text-gray-700 mb-4">
@@ -112,7 +112,7 @@ export default function About() {
         </div>
 
         {/* Достижения */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg shadow-lg p-8 mb-6 text-white">
+        <div className="bg-gradient-to-r from-[#778DA9] to-blue-800 rounded-lg shadow-lg p-8 mb-6 text-white">
           <h2 className="text-3xl font-bold mb-8 text-center">Наши достижения</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {achievements.map((achievement, index) => (
@@ -128,34 +128,34 @@ export default function About() {
         <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 mb-6">
           <h2 className="text-3xl font-bold mb-6 text-center">История компании</h2>
           <div className="max-w-4xl mx-auto">
-            <div className="relative pl-8 pb-8 border-l-2 border-blue-200">
-              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
-              <h3 className="text-xl font-semibold text-blue-700 mb-2">2015 — Основание</h3>
+            <div className="relative pl-8 pb-8 border-l-2 border-[#778DA9]">
+              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-[#778DA9]"></div>
+              <h3 className="text-xl font-semibold text-[#778DA9] mb-2">2015 — Основание</h3>
               <p className="text-gray-700 mb-4">
                 Компания была основана Алексеем Ивановым, профессиональным альпинистом, после его второго восхождения на
                 Эверест. Начав с организации восхождений на Эльбрус, компания быстро завоевала репутацию надежного
                 партнера для любителей гор.
               </p>
             </div>
-            <div className="relative pl-8 pb-8 border-l-2 border-blue-200">
-              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
-              <h3 className="text-xl font-semibold text-blue-700 mb-2">2017 — Международная экспансия</h3>
+            <div className="relative pl-8 pb-8 border-l-2 border-[#778DA9]">
+              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-[#778DA9]"></div>
+              <h3 className="text-xl font-semibold text-[#778DA9] mb-2">2017 — Международная экспансия</h3>
               <p className="text-gray-700 mb-4">
                 Расширение географии маршрутов: Альпы, Гималаи, Анды. Формирование международной команды гидов и
                 инструкторов. Первые восхождения на семитысячники с клиентами.
               </p>
             </div>
-            <div className="relative pl-8 pb-8 border-l-2 border-blue-200">
-              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
-              <h3 className="text-xl font-semibold text-blue-700 mb-2">2019 — Образовательное направление</h3>
+            <div className="relative pl-8 pb-8 border-l-2 border-[#778DA9]">
+              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-[#778DA9]"></div>
+              <h3 className="text-xl font-semibold text-[#778DA9] mb-2">2019 — Образовательное направление</h3>
               <p className="text-gray-700 mb-4">
                 Запуск образовательных программ и курсов по альпинизму для начинающих. Открытие тренировочных центров в
                 крупных городах. Разработка собственных методик подготовки к восхождениям.
               </p>
             </div>
-            <div className="relative pl-8 pb-8 border-l-2 border-blue-200 last:border-0">
-              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-blue-500"></div>
-              <h3 className="text-xl font-semibold text-blue-700 mb-2">2022 — Цифровая трансформация</h3>
+            <div className="relative pl-8 pb-8 border-l-2 border-[#778DA9] last:border-0">
+              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-[#778DA9]"></div>
+              <h3 className="text-xl font-semibold text-[#778DA9] mb-2">2022 — Цифровая трансформация</h3>
               <p className="text-gray-700 mb-4">
                 Запуск онлайн-платформы для планирования восхождений. Внедрение передовых технологий для повышения
                 безопасности. Создание сообщества альпинистов и любителей гор.
@@ -233,7 +233,7 @@ export default function About() {
         </div>
 
         {/* Призыв к действию */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg shadow-lg p-8 text-center text-white">
+        <div className="bg-gradient-to-r from-[#778DA9] to-blue-800 rounded-lg shadow-lg p-8 text-center text-white">
           <h2 className="text-3xl font-bold mb-4">Готовы покорить свою вершину?</h2>
           <p className="text-xl mb-6 max-w-3xl mx-auto">
             Присоединяйтесь к нам и откройте для себя удивительный мир высокогорья. Мы поможем вам подготовиться и
@@ -241,7 +241,7 @@ export default function About() {
           </p>
           <NavLink
             to="/"
-            className="inline-block px-6 py-3 bg-white text-blue-700 font-medium rounded-lg hover:bg-gray-100 transition-colors"
+            className="inline-block px-6 py-3 bg-white text-[#778DA9] font-medium rounded-lg hover:bg-gray-100 transition-colors"
           >
             Найти восхождение
           </NavLink>

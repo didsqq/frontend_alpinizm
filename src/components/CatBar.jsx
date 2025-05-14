@@ -1,15 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { observer } from "mobx-react-lite";
 import { Context } from "../context";
 import { Card, Row } from "react-bootstrap";
-
-// Трудности (difficulties)
-const difficulties = [
-  { id: "1", name: "Beginner" },
-  { id: "2", name: "Intermediate" },
-  { id: "3", name: "Advanced" },
-  { id: "4", name: "Expert" },
-];
+import { fetchClimbCategories } from "../http/climbsAPI";
 
 const CatBar = observer(() => {
   const { store } = useContext(Context);
@@ -19,15 +12,21 @@ const CatBar = observer(() => {
     store.mountainStore.setSelectedMountain(null);
   };
 
+  useEffect(() => {
+    fetchClimbCategories().then(data => {
+      store.categoryStore.setCategories(data)
+    })
+  }, [])
+
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-4 mb-4">
       <div className="flex items-center mb-3">
-        <h2 className="text-lg font-semibold">Filters</h2>
+        <h2 className="text-lg font-semibold">Фильтры</h2>
         <button
           onClick={clearFilters}
           className="border-none ml-auto inline-flex items-center px-3 py-1.5 rounded-md text-sm font-medium text-white bg-[#778DA9] hover:bg-[#778DA9]/90 transition-colors shadow-sm hover:shadow-md"
         >
-          Clear Filters
+          Очистить фильтры
         </button>
       </div>
 
@@ -43,7 +42,7 @@ const CatBar = observer(() => {
           }`}
           onClick={() => store.categoryStore.setSelectedCategory(category)}
         >
-          {category.name}
+          {category.Title}
         </button>
         ))}
         </div>

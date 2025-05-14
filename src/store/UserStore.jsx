@@ -52,6 +52,7 @@ export default class UserStore {
     }
     
     setUser(user) {
+        console.log(user)
         this._user = user
     }
 
