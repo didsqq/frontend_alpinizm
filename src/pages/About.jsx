@@ -205,25 +205,25 @@ export default function About() {
         <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 mb-6">
           <h2 className="text-3xl font-bold mb-6 text-center">Свяжитесь с нами</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                <Phone className="h-8 w-8 text-blue-600" />
+            <div className="flex flex-col items-center text-center ">
+              <div className="w-16 h-16 rounded-full bg-[#778DA9] flex items-center justify-center mb-4">
+                <Phone className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Телефон</h3>
               <p className="text-gray-700">+7 (800) 123-45-67</p>
               <p className="text-gray-700">Пн-Пт, 9:00-18:00</p>
             </div>
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                <Mail className="h-8 w-8 text-blue-600" />
+              <div className="w-16 h-16 rounded-full bg-[#778DA9] flex items-center justify-center mb-4">
+                <Mail className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Email</h3>
               <p className="text-gray-700">info@alter-ego.ru</p>
               <p className="text-gray-700">support@alter-ego.ru</p>
             </div>
             <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-4">
-                <MapPin className="h-8 w-8 text-blue-600" />
+              <div className="w-16 h-16 rounded-full bg-[#778DA9] flex items-center justify-center mb-4">
+                <MapPin className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Адрес</h3>
               <p className="text-gray-700">г. Казань, ул. Большая Красная, 55</p>

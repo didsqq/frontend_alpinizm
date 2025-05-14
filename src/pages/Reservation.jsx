@@ -126,19 +126,13 @@ function Reservation() {
         <header className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-6 mb-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div>
-              <button
-                onClick={() => navigate("/")}
-                className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-2"
-              >
-                <ArrowLeft className="h-4 w-4 mr-1" /> На главную
-              </button>
               <h1 className="text-3xl font-bold mb-2">Мои восхождения</h1>
               <p className="text-gray-600">Управляйте своими восхождениями и просматривайте историю</p>
             </div>
 
             <div className="mt-4 md:mt-0 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-50 rounded-lg p-3 flex items-center">
-                <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white mr-3">
+                <div className="w-12 h-12 rounded-full bg-[#778DA9] flex items-center justify-center text-white mr-3">
                   <User className="h-6 w-6" />
                 </div>
                 <div>
@@ -155,28 +149,28 @@ function Reservation() {
 
           {/* Статистика пользователя */}
           <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-4 text-white">
+            <div className="bg-gradient-to-br bg-[#33465c] rounded-lg p-4 text-white">
               <p className="text-sm opacity-80 mb-1">Всего восхождений</p>
               <div className="flex items-end justify-between">
                 <p className="text-3xl font-bold">{climbs.length}</p>
                 <Mountain className="h-8 w-8 opacity-70" />
               </div>
             </div>
-            <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-4 text-white">
+            <div className="bg-gradient-to-br bg-[#054b47] rounded-lg p-4 text-white">
               <p className="text-sm opacity-80 mb-1">Предстоит восхождений</p>
               <div className="flex items-end justify-between">
                 <p className="text-3xl font-bold">{climbs.filter(c => c.Status === "upcoming").length}</p>
                 <Calendar className="h-8 w-8 opacity-70" />
               </div>
             </div>
-            <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-4 text-white">
+            <div className="bg-gradient-to-br bg-[#ee6c4d] rounded-lg p-4 text-white">
               <p className="text-sm opacity-80 mb-1">Посещено стран</p>
               <div className="flex items-end justify-between">
                 <p className="text-3xl font-bold">{userStats.countries.length}</p>
                 <MapPin className="h-8 w-8 opacity-70" />
               </div>
             </div>
-            <div className="bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg p-4 text-white">
+            <div className="bg-gradient-to-br bg-[#b82843] rounded-lg p-4 text-white">
               <p className="text-sm opacity-80 mb-1">Максимальная высота</p>
               <div className="flex items-end justify-between">
                 <p className="text-3xl font-bold">5,642м</p>
@@ -297,12 +291,15 @@ function Reservation() {
                             >
                               Подробнее <ChevronRight className="h-4 w-4 ml-1" />
                             </button>
+                            {activeTab === "upcoming"
+                      ?
                             <button
                               onClick={() => handleCancelClimb(climb.ID)}
-                              className="inline-flex items-center justify-center border-none bg-red-600 text-white hover:bg-red-700 font-medium py-2 px-8 rounded-lg transition-colors min-w-[200px]"
+                              className="inline-flex items-center justify-center border-none bg-[#b82843] text-white hover:bg-[#b82843]/80 font-medium py-2 px-8 rounded-lg transition-colors min-w-[200px]"
                             >
                               Отменить восхождение
                             </button>
+                            : null}
                           </div>
                         </div>
                       </div>
@@ -311,7 +308,7 @@ function Reservation() {
                 ))
               ) : (
                 <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-8 text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-600 mb-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#778DA9] text-white mb-4">
                     {activeTab === "upcoming" ? (
                       <Calendar className="h-8 w-8" />
                     ) : activeTab === "completed" ? (

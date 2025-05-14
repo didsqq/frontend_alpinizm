@@ -15,6 +15,7 @@ export default function RoutePage() {
   const routeId = params.id
   const [climb, setClimb] = useState(null)
   const [registrationStatus, setRegistrationStatus] = useState({ message: '', type: '' })
+  const [modalGuide, setModalGuide] = useState(null)
 
   useEffect(() => {
     fetchClimb(routeId).then(setClimb)
@@ -22,7 +23,7 @@ export default function RoutePage() {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
+  }, [routeId])
 
   const nextImage = () => {
     if (climb?.Images) {
@@ -53,6 +54,29 @@ export default function RoutePage() {
 
   return (
     <div className="relative min-h-screen">
+      {/* Модальное окно для телефона тимлидера */}
+      {modalGuide && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full relative animate-fade-in">
+            <button
+              className="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl font-bold"
+              onClick={() => setModalGuide(null)}
+              aria-label="Закрыть"
+            >
+              ×
+            </button>
+            <h2 className="text-xl font-semibold mb-4 text-center">Контакт гида</h2>
+            <div className="text-center mb-2 text-lg font-medium">{modalGuide.SurnameName}</div>
+            <div className="text-center text-gray-700 mb-4">Телефон: <span className="font-semibold">{modalGuide.Phone || 'Не указан'}</span></div>
+            <button
+              className="w-full bg-[#778DA9] hover:bg-[#41506b] text-white font-medium py-2 px-6 rounded transition-colors"
+              onClick={() => setModalGuide(null)}
+            >
+              Закрыть
+            </button>
+          </div>
+        </div>
+      )}
       <div className="container mx-auto px-4 py-6">
         <Link to="/" className="font-medium inline-flex items-center text-[#778DA9] hover:text-blue-600 no-underline mb-6">
           <ArrowLeft className="h-4 w-4 mr-1" /> Вернуться к списку маршрутов
@@ -238,7 +262,10 @@ export default function RoutePage() {
                         </div>
                         <h3 className="text-lg font-medium text-center mb-1">{guide.SurnameName}</h3>
                         <div className="text-center text-gray-700 mb-1">Опыт: {guide.Experience}</div>
-                        <button className="w-full border-none bg-[#778DA9] hover:bg-[#778DA9]/80 text-white font-medium py-2 px-6 rounded transition-colors">
+                        <button
+                          className="w-full border-none bg-[#778DA9] hover:bg-[#778DA9]/80 text-white font-medium py-2 px-6 rounded transition-colors"
+                          onClick={() => setModalGuide(guide)}
+                        >
                           Связаться
                         </button>
                       </div>
