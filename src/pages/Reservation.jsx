@@ -3,9 +3,10 @@
 import { useState, useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { CLIMB_ROUTE } from "../utils/consts"
-import { fetchAlpinistClimb } from "../http/climbsAPI"
+import { fetchAlpinistClimb, cancelAlpinistClimb } from "../http/climbsAPI"
 import { Context } from "../context"
 import { observer } from "mobx-react-lite"
+
 import {
   ArrowLeft,
   Calendar,
@@ -44,18 +45,19 @@ function Reservation() {
   const { user } = useContext(Context);
   const [currentUser, setCurrentUser] = useState(null)
 
-  useEffect(() => {
-    const loadClimbs = async () => {
-      try {
-        setLoading(true)
-        const data = await fetchAlpinistClimb()
-        setClimbs(data)
-      } catch (e) {
-        setError(e.message)
-      } finally {
-        setLoading(false)
-      }
+  const loadClimbs = async () => {
+    try {
+      setLoading(true)
+      const data = await fetchAlpinistClimb()
+      setClimbs(data)
+    } catch (e) {
+      setError(e.message)
+    } finally {
+      setLoading(false)
     }
+  }
+
+  useEffect(() => {
     loadClimbs()
   }, [])
 
@@ -70,6 +72,18 @@ function Reservation() {
     }
     loadUser()
   }, [])
+
+  // Обработчик отмены восхождения
+  const handleCancelClimb = async (id) => {
+    try {
+      await cancelAlpinistClimb(id)
+      // После успешной отмены перезагружаем список восхождений
+      await loadClimbs()
+    } catch (error) {
+      console.error('Ошибка при отмене восхождения:', error)
+      setError('Ошибка при отмене восхождения')
+    }
+  }
 
   // Фильтрация восхождений по статусу (вкладке)
   const filteredClimbs = climbs
@@ -276,15 +290,18 @@ function Reservation() {
                             </div>
                           </div>
 
-                          <div className="mt-4 md:mt-0 flex flex-col items-start md:items-end">
-                            <div className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm mb-2">
-                              {climb.Category}
-                            </div>
+                          <div className="mt-4 md:mt-0 flex flex-col gap-2 w-full md:w-auto">
                             <button
                               onClick={() => navigate(CLIMB_ROUTE + '/' + climb.ID)}
-                              className="inline-flex items-center border-none bg-[#778DA9] text-white hover:bg-[#778DA9]/80 font-medium py-2 px-8 rounded-lg transition-colors"
+                              className="inline-flex items-center justify-center border-none bg-[#778DA9] text-white hover:bg-[#778DA9]/80 font-medium py-2 px-8 rounded-lg transition-colors min-w-[200px]"
                             >
                               Подробнее <ChevronRight className="h-4 w-4 ml-1" />
+                            </button>
+                            <button
+                              onClick={() => handleCancelClimb(climb.ID)}
+                              className="inline-flex items-center justify-center border-none bg-red-600 text-white hover:bg-red-700 font-medium py-2 px-8 rounded-lg transition-colors min-w-[200px]"
+                            >
+                              Отменить восхождение
                             </button>
                           </div>
                         </div>
