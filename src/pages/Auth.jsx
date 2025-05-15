@@ -86,24 +86,28 @@ const Auth = observer(() => {
                 placeholder="Введите вашу фамилию..."
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)}
+                maxLength={50}
               />
               <Form.Control
                 className="mt-3"
                 placeholder="Введите ваше имя..."
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                maxLength={50}
               />
               <Form.Control
                 className="mt-3"
                 placeholder="Введите ваш адрес..."
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                maxLength={50}
               />
               <Form.Control
                 className="mt-3"
                 placeholder="Введите ваш телефон..."
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                maxLength={50}
               />
               <Form.Select
                 className="mt-3"
@@ -133,6 +137,7 @@ const Auth = observer(() => {
             placeholder="Введите ваш login..."
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            maxLength={50}
           />
           <Form.Control
             className="mt-3"
@@ -140,6 +145,7 @@ const Auth = observer(() => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
+            maxLength={50}
           />
           <div className="mt-8">
           {registrationStatus.message && (
