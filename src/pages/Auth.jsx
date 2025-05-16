@@ -21,18 +21,74 @@ const Auth = observer(() => {
   const [i_sport_category, setISportCategory] = useState(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [registrationStatus, setRegistrationStatus] = useState({ message: '', type: '' })
+  const [registrationStatus, setRegistrationStatus] = useState({ message: '', type: '' });
+  const [errors, setErrors] = useState({
+    surname: '',
+    name: '',
+    username: '',
+    password: ''
+  });
 
   useEffect(() => {
     fetchCategories().then(data => user.setCategories(data))
   }, [])
 
   useEffect(() => {
-    // Сбрасываем сообщение при смене типа формы
     setRegistrationStatus({ message: '', type: '' });
   }, [isLogin]);
 
+  const validateName = (value) => {
+    // Проверка на только буквы (русские и английские) без пробелов и цифр
+    return /^[a-zA-Zа-яА-ЯёЁ]+$/.test(value);
+  };
+
+  const handleNameChange = (value, field) => {
+    if (validateName(value) || value === "") {
+      if (field === 'name') setName(value);
+      if (field === 'surname') setSurname(value);
+      setErrors({...errors, [field]: ''});
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    let isValid = true;
+
+    if (!isLogin) {
+      if (!surname) {
+        newErrors.surname = 'Фамилия обязательна';
+        isValid = false;
+      } else if (!validateName(surname)) {
+        newErrors.surname = 'Фамилия должна содержать только буквы';
+        isValid = false;
+      }
+
+      if (!name) {
+        newErrors.name = 'Имя обязательно';
+        isValid = false;
+      } else if (!validateName(name)) {
+        newErrors.name = 'Имя должно содержать только буквы';
+        isValid = false;
+      }
+    }
+
+    if (!username) {
+      newErrors.username = 'Логин обязателен';
+      isValid = false;
+    }
+
+    if (!password) {
+      newErrors.password = 'Пароль обязателен';
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const click = async () => {
+    if (!validateForm()) return;
+
     try {
       let data;
       if (isLogin) {
@@ -81,20 +137,46 @@ const Auth = observer(() => {
         }}>
           {!isLogin && (
             <>
-              <Form.Control
-                className="mt-3"
-                placeholder="Введите вашу фамилию..."
-                value={surname}
-                onChange={(e) => setSurname(e.target.value)}
-                maxLength={50}
-              />
-              <Form.Control
-                className="mt-3"
-                placeholder="Введите ваше имя..."
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                maxLength={50}
-              />
+              <Form.Group className="mt-3">
+                <Form.Control
+                  placeholder="Введите вашу фамилию..."
+                  value={surname}
+                  onChange={(e) => handleNameChange(e.target.value, 'surname')}
+                  onBlur={() => {
+                    if (!surname) {
+                      setErrors({...errors, surname: 'Фамилия обязательна'});
+                    } else if (!validateName(surname)) {
+                      setErrors({...errors, surname: 'Фамилия должна содержать только буквы'});
+                    }
+                  }}
+                  maxLength={50}
+                  isInvalid={!!errors.surname}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.surname}
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group className="mt-3">
+                <Form.Control
+                  placeholder="Введите ваше имя..."
+                  value={name}
+                  onChange={(e) => handleNameChange(e.target.value, 'name')}
+                  onBlur={() => {
+                    if (!name) {
+                      setErrors({...errors, name: 'Имя обязательно'});
+                    } else if (!validateName(name)) {
+                      setErrors({...errors, name: 'Имя должно содержать только буквы'});
+                    }
+                  }}
+                  maxLength={50}
+                  isInvalid={!!errors.name}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {errors.name}
+                </Form.Control.Feedback>
+              </Form.Group>
+
               <Form.Control
                 className="mt-3"
                 placeholder="Введите ваш адрес..."
@@ -132,21 +214,44 @@ const Auth = observer(() => {
               </Form.Select>
             </>
           )}
-          <Form.Control
-            className="mt-3"
-            placeholder="Введите ваш login..."
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            maxLength={50}
-          />
-          <Form.Control
-            className="mt-3"
-            placeholder="Введите ваш пароль..."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            maxLength={50}
-          />
+          
+          <Form.Group className="mt-3">
+            <Form.Control
+              placeholder="Введите ваш login..."
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              onBlur={() => {
+                if (!username) {
+                  setErrors({...errors, username: 'Логин обязателен'});
+                }
+              }}
+              maxLength={50}
+              isInvalid={!!errors.username}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.username}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group className="mt-3">
+            <Form.Control
+              placeholder="Введите ваш пароль..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onBlur={() => {
+                if (!password) {
+                  setErrors({...errors, password: 'Пароль обязателен'});
+                }
+              }}
+              type="password"
+              maxLength={50}
+              isInvalid={!!errors.password}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.password}
+            </Form.Control.Feedback>
+          </Form.Group>
+
           <div className="mt-8">
           {registrationStatus.message && (
             <div className={`mb-4 p-4 rounded-lg ${
